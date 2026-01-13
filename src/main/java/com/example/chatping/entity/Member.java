@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class Member extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)
@@ -26,7 +27,7 @@ public class Member extends BaseTimeEntity {
 
     private String nickname;
 
-    // 양방향 매핑 (필요할 때만 씀)
+    // 양방향 매핑 (필요할 때만 쓴다)
     @OneToMany(mappedBy = "member")
     private List<TrustScore> trustScores = new ArrayList<>();
 }

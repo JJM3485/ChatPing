@@ -10,7 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Product extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

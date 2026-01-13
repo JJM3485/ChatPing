@@ -11,7 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TrustScore {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,5 +22,5 @@ public class TrustScore {
     @Enumerated(EnumType.STRING)
     private CharacterType characterType; // MALE, FEMALE, CAT
 
-    private int score; // 점수
+    private int score; // 신뢰도 점수
 }

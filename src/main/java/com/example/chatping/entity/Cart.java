@@ -13,14 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 public class Cart {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    // 카트 삭제 시 안의 물건들도 같이 삭제(Cascade)
+    // 카트 삭제 시 안의 물건들도 같이 삭제
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private List<CartItem> cartItems = new ArrayList<>();
 }
