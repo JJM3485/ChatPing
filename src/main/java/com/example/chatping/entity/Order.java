@@ -1,4 +1,3 @@
-// Order.java
 package com.example.chatping.entity;
 
 import com.example.chatping.enums.OrderStatus;

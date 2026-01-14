@@ -1,4 +1,3 @@
-// CartItem.java
 package com.example.chatping.entity;
 
 import jakarta.persistence.*;
