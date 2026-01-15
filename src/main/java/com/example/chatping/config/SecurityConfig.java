@@ -1,5 +1,10 @@
 package com.example.chatping.config;
 
+import com.example.chatping.jwt.JwtAuthenticationFilter;
+import com.example.chatping.jwt.JwtTokenProvider;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,20 +15,24 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // 1. CSRF 보안 끄기
                 .csrf(csrf -> csrf.disable())
 
-                // 2. 모든 경로 허용
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/**").permitAll() // 일단은 다 열어둠 (나중에 잠글 예정)
                 )
 
-                // 3. H2 콘솔이나 프레임 사용 시 깨짐 방지
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
         return http.build();

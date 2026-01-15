@@ -27,7 +27,7 @@ public class MemberController {
     // 주소: POST http://localhost:8080/members/login
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        Member member = memberService.login(request);
-        return ResponseEntity.ok("로그인 성공! 환영합니다, " + member.getNickname() + "님!");
+        String token = memberService.login(request); // 토큰을 받음
+        return ResponseEntity.ok(token);
     }
 }

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder; // 보안 설정 필요
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.chatping.jwt.JwtTokenProvider;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final TrustScoreRepository trustScoreRepository;
     private final PasswordEncoder passwordEncoder; // 비밀번호 암호화용
+    private final JwtTokenProvider jwtTokenProvider;
 
     // 1. 회원가입
     @Transactional
@@ -47,15 +49,14 @@ public class MemberService {
     }
 
     // 2. 로그인
-    public Member login(LoginRequest request) {
+    public String login(LoginRequest request) { // 리턴 타입: Member -> String
         Member member = memberRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("가입되지 않은 이메일입니다."));
 
         if (!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
             throw new RuntimeException("비밀번호가 일치하지 않습니다.");
         }
-
-        return member;
+        return jwtTokenProvider.createToken(member.getEmail());
     }
 
     // 캐릭터 친밀도 초기화
