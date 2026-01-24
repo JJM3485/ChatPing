@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll() // 일단은 다 열어둠 (나중에 잠글 예정)
+                        .requestMatchers("/**").permitAll()
                 )
 
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)

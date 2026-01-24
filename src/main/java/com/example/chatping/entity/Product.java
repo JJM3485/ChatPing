@@ -23,4 +23,12 @@ public class Product extends BaseTimeEntity {
 
     private String imageUrl;
     private String category;
+
+    public void removeStock(int count) {
+        int restStock = this.stockQuantity - count;
+        if (restStock < 0) {
+            throw new RuntimeException("재고가 부족합니다.");
+        }
+        this.stockQuantity = restStock;
+    }
 }

@@ -1,14 +1,15 @@
 package com.example.chatping.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Coupon {
 
     @Id

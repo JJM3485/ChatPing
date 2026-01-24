@@ -22,7 +22,7 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder; // 비밀번호 암호화용
     private final JwtTokenProvider jwtTokenProvider;
 
-    // 1. 회원가입
+    // 회원가입
     @Transactional
     public Long signUp(SignUpRequest request) {
         // 이메일 중복 검사
@@ -48,7 +48,7 @@ public class MemberService {
         return savedMember.getId();
     }
 
-    // 2. 로그인
+    // 로그인
     public String login(LoginRequest request) { // 리턴 타입: Member -> String
         Member member = memberRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("가입되지 않은 이메일입니다."));

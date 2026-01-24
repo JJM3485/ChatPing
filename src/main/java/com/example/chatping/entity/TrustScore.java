@@ -23,4 +23,8 @@ public class TrustScore {
     private CharacterType characterType; // MALE, FEMALE, CAT
 
     private int score; // 신뢰도 점수
+
+    public void addScore(int point) {
+        this.score += point;
+    }
 }

@@ -15,19 +15,19 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    // 1. 회원가입 API
-    // 주소: POST http://localhost:8080/members/signup
+    // 회원가입 API
+    // POST http://localhost:8080/members/signup
     @PostMapping("/signup")
     public ResponseEntity<String> signUp(@RequestBody SignUpRequest request) {
         Long memberId = memberService.signUp(request);
         return ResponseEntity.ok("회원가입 성공! 회원 ID: " + memberId);
     }
 
-    // 2. 로그인 API
-    // 주소: POST http://localhost:8080/members/login
+    // 로그인 API
+    // POST http://localhost:8080/members/login
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        String token = memberService.login(request); // 토큰을 받음
+        String token = memberService.login(request);
         return ResponseEntity.ok(token);
     }
 }
