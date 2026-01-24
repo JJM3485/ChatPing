@@ -1,6 +1,6 @@
 package com.example.chatping.service;
 
-import com.example.chatping.dto.OrderRequest;
+import com.example.chatping.dto.OrderRequestDto;
 import com.example.chatping.entity.*;
 import com.example.chatping.enums.OrderStatus;
 import com.example.chatping.repository.MemberRepository;
@@ -21,7 +21,7 @@ public class OrderService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public Long order(String email, OrderRequest request) {
+    public Long order(String email, OrderRequestDto request) {
         // 주문자 조회
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다."));

@@ -1,8 +1,7 @@
 package com.example.chatping.controller;
 
-import com.example.chatping.dto.LoginRequest;
-import com.example.chatping.dto.SignUpRequest;
-import com.example.chatping.entity.Member;
+import com.example.chatping.dto.LoginRequestDto;
+import com.example.chatping.dto.SignUpRequestDto;
 import com.example.chatping.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ public class MemberController {
     // 회원가입 API
     // POST http://localhost:8080/members/signup
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody SignUpRequest request) {
+    public ResponseEntity<String> signUp(@RequestBody SignUpRequestDto request) {
         Long memberId = memberService.signUp(request);
         return ResponseEntity.ok("회원가입 성공! 회원 ID: " + memberId);
     }
@@ -26,7 +25,7 @@ public class MemberController {
     // 로그인 API
     // POST http://localhost:8080/members/login
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<String> login(@RequestBody LoginRequestDto request) {
         String token = memberService.login(request);
         return ResponseEntity.ok(token);
     }

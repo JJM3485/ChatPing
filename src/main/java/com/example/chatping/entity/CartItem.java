@@ -1,13 +1,14 @@
 package com.example.chatping.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CartItem {
 
     @Id
@@ -23,4 +24,17 @@ public class CartItem {
     private Product product;
 
     private int count;
+
+    public void addCount(int count) {
+        this.count += count;
+    }
+
+    // 생성 메서드
+    public static CartItem createCartItem(Cart cart, Product product, int count) {
+        return CartItem.builder()
+                .cart(cart)
+                .product(product)
+                .count(count)
+                .build();
+    }
 }

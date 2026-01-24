@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class OrderRequest {
+public class OrderRequestDto {
     private Long productId; // 무슨 상품
     private int count;      // 몇 개 
 }

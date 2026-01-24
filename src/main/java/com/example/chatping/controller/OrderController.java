@@ -1,11 +1,9 @@
 package com.example.chatping.controller;
 
-import com.example.chatping.dto.OrderRequest;
+import com.example.chatping.dto.OrderRequestDto;
 import com.example.chatping.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +20,7 @@ public class OrderController {
 
     // http://localhost:8080/orders
     @PostMapping
-    public ResponseEntity<String> order(@RequestBody OrderRequest request, Principal principal) {
+    public ResponseEntity<String> order(@RequestBody OrderRequestDto request, Principal principal) {
         String email = principal.getName();
 
         Long orderId = orderService.order(email, request);

@@ -1,7 +1,7 @@
 package com.example.chatping.service;
 
-import com.example.chatping.dto.LoginRequest;
-import com.example.chatping.dto.SignUpRequest;
+import com.example.chatping.dto.LoginRequestDto;
+import com.example.chatping.dto.SignUpRequestDto;
 import com.example.chatping.entity.Member;
 import com.example.chatping.entity.TrustScore;
 import com.example.chatping.enums.CharacterType;
@@ -24,7 +24,7 @@ public class MemberService {
 
     // 회원가입
     @Transactional
-    public Long signUp(SignUpRequest request) {
+    public Long signUp(SignUpRequestDto request) {
         // 이메일 중복 검사
         if (memberRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("이미 존재하는 이메일입니다.");
@@ -49,7 +49,7 @@ public class MemberService {
     }
 
     // 로그인
-    public String login(LoginRequest request) { // 리턴 타입: Member -> String
+    public String login(LoginRequestDto request) { // 리턴 타입: Member -> String
         Member member = memberRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("가입되지 않은 이메일입니다."));
 
